@@ -24,10 +24,15 @@ from django.conf.urls.static import static
 from django.conf import settings
 router  = routers.DefaultRouter()
 
-router.register('',Memeview)
+router.register('Home',Memeview)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
+    path('register/', UserRegistrationApiView.as_view(),name='register'),
+    path('active/<uid64>/<token>/', activate),
+    path('login/',UserLoginApiView.as_view(),name='login'),
+    
+    path('logout/',UserLogoutView.as_view(),name='logout')
 ]
 urlpatterns += static(settings.MEDIA_URL ,document_root = settings.MEDIA_ROOT)

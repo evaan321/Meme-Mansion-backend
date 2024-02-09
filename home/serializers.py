@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model  = User
-        fields = ['username']
+        fields = ['username','id']
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model  = Category
@@ -13,8 +13,12 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class MemeSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
-    category = CategorySerializer(many= True)
+    user = UserSerializer(read_only = True)
+    category = CategorySerializer(many= True ,read_only = True)
     class Meta:
         model = Meme
-        fields = '__all__'
+        fields = ['user','title','photo','category']
+    
+
+    
+    

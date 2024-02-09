@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'contactUs',
     'allAuth',
     'corsheaders',
+    'rest_framework.authtoken'
 
     
 ]

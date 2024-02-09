@@ -8,3 +8,4 @@ from rest_framework import viewsets
 class Memeview(viewsets.ModelViewSet):
     queryset = Meme.objects.all()
     serializer_class = MemeSerializer
+
