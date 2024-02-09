@@ -13,12 +13,14 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class MemeSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only = True)
+    username = serializers.CharField(source = 'user.username',read_only= True)
+    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
     category = CategorySerializer(many= True ,read_only = True)
+    
     class Meta:
         model = Meme
-        fields = ['user','title','photo','category']
+        fields = ['username','user','title','photo','category',]
     
-
+    
     
     
