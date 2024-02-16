@@ -10,4 +10,7 @@ class Memeview(viewsets.ModelViewSet):
     serializer_class = MemeSerializer
     parser_classes = [MultiPartParser]
 
-   
+class CategoryView(viewsets.ModelViewSet):
+    queryset = Category.objects.all()  
+    serializer_class = CategorySerializer
+    

@@ -15,7 +15,7 @@ class CategorySerializer(serializers.ModelSerializer):
 class MemeSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source = 'user.username',read_only= True)
     user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
-    category = CategorySerializer(many= True ,read_only = True)
+    category = CategorySerializer(many= True ,)
     
     class Meta:
         model = Meme

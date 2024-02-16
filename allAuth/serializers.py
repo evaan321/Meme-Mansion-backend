@@ -3,7 +3,7 @@ from rest_framework import serializers
 from rest_framework import viewsets
 from django.contrib.auth.models import User
 from rest_framework.views import APIView
-
+from .models import *
 
 
 class RegisterationSerializer(serializers.ModelSerializer):
@@ -35,3 +35,33 @@ class RegisterationSerializer(serializers.ModelSerializer):
 class UserLoginSerializer(serializers.Serializer):
     username = serializers.CharField(required = True)
     password = serializers.CharField(required = True)
+
+class UserUpdateSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = UserProfile
+        fields = '__all__'
+
+class UserUpdateSerializer(serializers.ModelSerializer):
+    
+
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email', 'username']
+
+    def update(self, instance, validated_data):
+        
+
+        instance.first_name = validated_data.get('first_name', instance.first_name)
+        instance.last_name = validated_data.get('last_name', instance.last_name)
+        instance.email = validated_data.get('email', instance.email)
+        instance.username = validated_data.get('username', instance.username)
+
+       
+        
+
+        
+        instance.save()
+       
+
+        return instance

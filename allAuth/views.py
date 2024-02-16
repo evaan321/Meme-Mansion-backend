@@ -18,6 +18,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate,login,logout
+from rest_framework import generics
 
 
 class UserRegistrationApiView(APIView):
@@ -80,3 +81,14 @@ class UserLogoutView(APIView):
         logout(request)
         return redirect('login')
 
+
+   
+class UserUpdateView(generics.UpdateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserUpdateSerializer
+    
+    def get_object(self):
+        return self.request.user
+    
+
+  

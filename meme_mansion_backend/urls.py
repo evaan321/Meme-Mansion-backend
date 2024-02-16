@@ -24,7 +24,11 @@ from django.conf.urls.static import static
 from django.conf import settings
 router  = routers.DefaultRouter()
 
-router.register('Home',Memeview)
+router.register('Home',Memeview),
+router.register('category',CategoryView)
+
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,6 +37,9 @@ urlpatterns = [
     path('active/<uid64>/<token>/', activate),
     path('login/',UserLoginApiView.as_view(),name='login'),
     
-    path('logout/',UserLogoutView.as_view(),name='logout')
+    path('logout/',UserLogoutView.as_view(),name='logout'),
+    path('profile/update/',UserUpdateView.as_view(), name='update-user-profile'),
+    
+
 ]
 urlpatterns += static(settings.MEDIA_URL ,document_root = settings.MEDIA_ROOT)
