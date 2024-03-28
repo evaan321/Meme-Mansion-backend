@@ -24,8 +24,11 @@ from django.conf.urls.static import static
 from django.conf import settings
 router  = routers.DefaultRouter()
 
-router.register('Home',Memeview),
-router.register('category',CategoryView)
+router.register('Home',Memereg),
+router.register('category',CategoryView),
+router.register('all',Memeview)
+
+
 
 
 
@@ -39,6 +42,7 @@ urlpatterns = [
     
     path('logout/',UserLogoutView.as_view(),name='logout'),
     path('profile/update/',UserUpdateView.as_view(), name='update-user-profile'),
+    # path('showmeme/',ShowMeme.as_view(),name = 'ShowMeme')
     
 
 ]

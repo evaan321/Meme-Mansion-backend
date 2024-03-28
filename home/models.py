@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 
 class Category(models.Model):
     categoryName = models.CharField(max_length = 12)
+
+    def __str__(self) -> str:
+        return self.categoryName
     
 
 class Comment(models.Model):
