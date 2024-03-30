@@ -14,6 +14,8 @@ from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
 
 from django.utils.encoding import force_bytes
 
+from rest_framework.parsers import MultiPartParser
+
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from rest_framework.authtoken.models import Token
@@ -89,6 +91,16 @@ class UserUpdateView(generics.UpdateAPIView):
     
     def get_object(self):
         return self.request.user
+    
+class profileView(viewsets.ModelViewSet):
+    queryset = UserProfile.objects.all()
+    serializer_class = profileserializer
+    parser_classes = [MultiPartParser]
+
+
+class userView(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = userserializer
     
 
   

@@ -65,3 +65,19 @@ class UserUpdateSerializer(serializers.ModelSerializer):
        
 
         return instance
+    
+
+class userserializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model  = User
+        fields = ['id', 'email', 'username', 'first_name','last_name']
+
+
+class profileserializer(serializers.ModelSerializer):
+    user_id = serializers.IntegerField(source='user.id',read_only = True)
+    email = serializers.EmailField(source='user.email',read_only = True)
+    username = serializers.CharField(source='user.username',read_only = True)
+    class Meta:
+        model  = UserProfile
+        fields = ['user_id', 'email', 'username', 'bio', 'avater']

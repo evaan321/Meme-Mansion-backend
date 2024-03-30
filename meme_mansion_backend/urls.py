@@ -26,7 +26,9 @@ router  = routers.DefaultRouter()
 
 router.register('Home',Memereg),
 router.register('category',CategoryView),
-router.register('all',Memeview)
+router.register('all',Memeview),
+router.register('profiles',profileView),
+router.register('users',userView)
 
 
 
