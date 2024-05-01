@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 
 from rest_framework import viewsets,response
+from rest_framework.permissions import IsAuthenticated
 
 from .models import *
 
@@ -103,4 +104,19 @@ class userView(viewsets.ModelViewSet):
     serializer_class = userserializer
     
 
-  
+class UserProfileUpdateView(APIView):
+    
+
+    def get(self, request):
+        # Fetch the user and their profile for initial data display
+        serializer = CombinedProfileSerializer(request.user)
+        return Response(serializer.data)
+
+    def post(self, request):
+        # Update the user and their profile
+        serializer = CombinedProfileSerializer(request.user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message": "Profile updated successfully"})
+        else:
+            return Response(serializer.errors, status=400)

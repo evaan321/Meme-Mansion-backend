@@ -81,3 +81,32 @@ class profileserializer(serializers.ModelSerializer):
     class Meta:
         model  = UserProfile
         fields = ['user_id', 'email', 'username', 'bio', 'avater']
+
+class CombinedProfileSerializer(serializers.ModelSerializer):
+    bio = serializers.CharField(source='userprofile.bio')
+    avatar = serializers.ImageField(source='userprofile.avatar')
+
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email', 'bio', 'avatar']
+
+    def update(self, instance, validated_data):
+        # Update user model fields
+        user_data = validated_data
+        instance.first_name = user_data.get('first_name', instance.first_name)
+        instance.last_name = user_data.get('last_name', instance.last_name)
+        instance.email = user_data.get('email', instance.email)
+        instance.save()
+
+        # Update UserProfile fields
+        profile_data = validated_data.get('userprofile', {})
+        profile = instance.userprofile
+        profile.bio = profile_data.get('bio', profile.bio)
+        
+        avatar = profile_data.get('avatar', None)
+        if avatar:
+            profile.avatar.save(avatar.name, avatar, save=True)
+        else:
+            profile.save()
+
+        return instance

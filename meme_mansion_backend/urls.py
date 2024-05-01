@@ -43,7 +43,7 @@ urlpatterns = [
     path('login/',UserLoginApiView.as_view(),name='login'),
     
     path('logout/',UserLogoutView.as_view(),name='logout'),
-    path('profile/update/',UserUpdateView.as_view(), name='update-user-profile'),
+     path('api/update-profile/', UserProfileUpdateView.as_view(), name='update-profile'),
     # path('showmeme/',ShowMeme.as_view(),name = 'ShowMeme')
     
 
