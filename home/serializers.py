@@ -38,5 +38,5 @@ class MemSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Meme
-        fields = ['username','user','title','photo','category',]
+        fields = ['username','user','title','photo','category','likes']
         depth = 1
