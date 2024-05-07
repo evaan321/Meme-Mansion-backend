@@ -39,4 +39,6 @@ def like_meme(request, meme_id):
 
     return JsonResponse({'message': 'Meme liked successfully'}, status=200)
 
+def myfunc(s):
+    ab = 's'
     
