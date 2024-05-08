@@ -34,9 +34,16 @@ def like_meme(request, meme_id):
     # Fetch the meme object
     meme = get_object_or_404(Meme, pk=meme_id)
     
-    # Add user ID to meme likes
-    meme.likes.add(user_id)
+   
 
-    return JsonResponse({'message': 'Meme liked successfully'}, status=200)
+    if meme.likes.filter(id=user_id).exists():
+       
+        meme.likes.remove(user_id)
+        message = 'Meme unliked successfully'
+    else:
+       
+        meme.likes.add(user_id)
+        message = 'Meme liked successfully'
 
-    
+    return JsonResponse({'message': message}, status=200)
+

@@ -46,6 +46,7 @@ urlpatterns = [
     path('profile/update/',UserUpdateView.as_view(), name='update-user-profile'),
     # path('showmeme/',ShowMeme.as_view(),name = 'ShowMeme')
     path('memes/<int:meme_id>/like/', like_meme, name='like_meme'),
+   
 
 ]
 urlpatterns += static(settings.MEDIA_URL ,document_root = settings.MEDIA_ROOT)
